@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Click the Button Game</title>
-<style>
+<link rel="stylesheet" href="style.css"> <style>
   /* Reset some default styles */
   * {
     box-sizing: border-box;
@@ -24,6 +24,12 @@
     color: #222;
     user-select: none;
   }
+  /* Overrides for this specific page's background and text color to match the game's gradient */
+  body:not(.main-page) { /* This ensures your general body styles from style.css don't conflict, if you have other body styles there. If not, just remove body from style.css for this page */
+      background-color: transparent; /* This page defines its own gradient */
+      color: #222; /* Adjust text color for better contrast on this page's background */
+  }
+
 
   h1 {
     font-weight: 700;
@@ -102,6 +108,16 @@
 </style>
 </head>
 <body>
+
+<header>
+    <nav>
+       <a href="index.html">Home</a>
+        <a href="https://www.instagram.com/gourav_dhanda_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">My Instagram</a>
+        <a href="https://www.whatsapp.com" target="_blank">My Whatsapp</a>
+        <a href="all%20my%20insta%20photos.html">All My Insta photos</a>
+        <a href="Playgame.html">Play Game</a>
+    </nav>
+</header>
 
 <h1>Click the Button Game</h1>
 <div id="score">Score: 0</div>
