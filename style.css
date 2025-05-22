@@ -5,9 +5,10 @@
     box-sizing: border-box;
 }
 
+/* Combined and refined body style */
 body {
-    background-color: #0e0c24;
-    color: #ffffff;
+    background-color: #0d0d1f; /* Dark background */
+    color: #ffffff; /* White text */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     padding: 20px;
@@ -15,10 +16,13 @@ body {
 
 /* Header styling */
 header {
-    background-color: #0e0c24;
+    background-color: #0e0c24; /* Slightly different dark for header */
     padding: 20px 0;
     border-bottom: 1px solid #222;
     text-align: center;
+    position: sticky; /* Make header sticky */
+    top: 0; /* Stick to the top */
+    z-index: 1000; /* Ensure it's above other content */
 }
 
 nav a {
@@ -31,7 +35,7 @@ nav a {
 }
 
 nav a:hover {
-    color: #ffcc00;
+    color: #ffcc00; /* Yellow on hover */
 }
 
 /* Profile section layout */
@@ -70,6 +74,33 @@ pre {
     border-radius: 10px;
 }
 
+/* Gallery specific styles for all my insta photos.html */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 30px auto;
+    background-color: rgba(255, 255, 255, 0.05); /* Slightly lighter background for gallery */
+    border-radius: 10px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+}
+
+.gallery img {
+    width: 100%; /* Make images fill their grid area */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px;
+    object-fit: cover; /* Crop images to fit if necessary */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+}
+
+.gallery img:hover {
+    transform: scale(1.03); /* Slight zoom on hover */
+}
+
+
 /* Responsive design */
 @media (max-width: 768px) {
     .container {
@@ -85,7 +116,13 @@ pre {
         display: inline-block;
         margin: 10px;
     }
+
+    .gallery {
+        grid-template-columns: 1fr; /* Single column on small screens */
+    }
 }
+
+/* Footer styling */
 footer {
   background-color: #1c1b2f;
   padding: 30px 20px;
@@ -93,12 +130,12 @@ footer {
   margin-top: 50px;
   border-top: 1px solid #444;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center; /* Center footer content */
 }
 
 .footer-container {
   max-width: 1000px;
   margin: auto;
-  text-align: center;
 }
 
 .footer-container p {
@@ -133,13 +170,3 @@ footer {
   color: #999;
   margin-top: 10px;
 }
-
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #0d0d1f;
-  font-family: 'Segoe UI', sans-serif;
-  color: white;
-}
-
-/
