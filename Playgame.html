@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Click the Button Game</title>
+<style>
+  /* Reset some default styles */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    padding: 40px 20px;
+    color: #222;
+    user-select: none;
+  }
+
+  h1 {
+    font-weight: 700;
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    color: #fff;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  #score, #time {
+    font-size: 1.5rem;
+    margin: 10px 0;
+    color: #fff;
+    text-shadow: 0 0 5px rgba(0,0,0,0.4);
+  }
+
+  #gameArea {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    margin: 20px auto 40px;
+    overflow: hidden;
+    border: 3px solid #3a7bd5;
+  }
+
+  #clickBtn {
+    position: absolute;
+    padding: 12px 28px;
+    background: #3a7bd5;
+    border: none;
+    border-radius: 50px;
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(58, 123, 213, 0.6);
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    user-select: none;
+  }
+
+  #clickBtn:hover {
+    background: #2e5abf;
+    transform: scale(1.05);
+  }
+
+  #clickBtn:active {
+    transform: scale(0.95);
+  }
+
+  #startBtn {
+    padding: 14px 40px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 50px;
+    border: none;
+    background: #f39c12;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(243, 156, 18, 0.6);
+    transition: background-color 0.3s ease;
+    user-select: none;
+  }
+
+  #startBtn:hover:enabled {
+    background: #d87e0a;
+  }
+
+  #startBtn:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    box-shadow: none;
+  }
+</style>
+</head>
+<body>
+
+<h1>Click the Button Game</h1>
+<div id="score">Score: 0</div>
+<div id="time">Time left: 10</div>
+<div id="gameArea">
+  <button id="clickBtn" style="display:none;">Love you</button>
+</div>
+<button id="startBtn">Start Game</button>
+
+<script>
+  const gameArea = document.getElementById('gameArea');
+  const clickBtn = document.getElementById('clickBtn');
+  const scoreDisplay = document.getElementById('score');
+  const timeDisplay = document.getElementById('time');
+  const startBtn = document.getElementById('startBtn');
+
+  let score = 0;
+  let timeLeft = 10;
+  let gameInterval;
+  let timerInterval;
+
+  function randomPosition() {
+    const maxX = gameArea.clientWidth - clickBtn.clientWidth;
+    const maxY = gameArea.clientHeight - clickBtn.clientHeight;
+    const x = Math.floor(Math.random() * maxX);
+    const y = Math.floor(Math.random() * maxY);
+    return { x, y };
+  }
+
+  function moveButton() {
+    const pos = randomPosition();
+    clickBtn.style.left = pos.x + 'px';
+    clickBtn.style.top = pos.y + 'px';
+  }
+
+  function startGame() {
+    score = 0;
+    timeLeft = 10;
+    scoreDisplay.textContent = 'Score: ' + score;
+    timeDisplay.textContent = 'Time left: ' + timeLeft;
+    clickBtn.style.display = 'inline-block';
+    startBtn.disabled = true;
+
+    moveButton();
+
+    gameInterval = setInterval(moveButton, 1000);
+
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      timeDisplay.textContent = 'Time left: ' + timeLeft;
+      if (timeLeft <= 0) {
+        endGame();
+      }
+    }, 1000);
+  }
+
+  function endGame() {
+    clearInterval(gameInterval);
+    clearInterval(timerInterval);
+    clickBtn.style.display = 'none';
+    startBtn.disabled = false;
+    alert('Game over! Your score is ' + score);
+  }
+
+  clickBtn.addEventListener('click', () => {
+    score++;
+    scoreDisplay.textContent = 'Score: ' + score;
+    moveButton();
+  });
+
+  startBtn.addEventListener('click', startGame);
+</script>
+
+</body>
+</html>
